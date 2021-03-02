@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -53,7 +55,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                showInputDialog();
             }
         });
 
@@ -126,4 +127,5 @@ public class MainActivity extends AppCompatActivity {
         return stateList;
 
     }
-}
+
+    }
