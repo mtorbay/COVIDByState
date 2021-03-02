@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -102,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
                         state.setTxtDeaths("Deaths: " + stateObj.getString("deathConfirmed"));
                         state.setTxtHospitalizations("Hospitalizations: " + stateObj.getString("hospitalized"));
                         state.setTxtHospitalizedCurrently("Currently Hospitalized: " + stateObj.getString("hospitalizedCurrently"));
-                        ///Log.d("Movies =: ", movie.getTitle());
+                        Log.d("States =: ", state.getTxtState());
                         stateList.add(state);
 
                     }
