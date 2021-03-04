@@ -43,7 +43,7 @@ public class DetailsActivity extends AppCompatActivity {
 
         queue = Volley.newRequestQueue(this);
 
-        state = (State) getIntent().getSerializableExtra("state"); // récupérer tous les éléments
+        state = (State) getIntent().getSerializableExtra("state"); // récupérer les éléments
         stateId = state.getTxtDate();
 
         setUpUI();
