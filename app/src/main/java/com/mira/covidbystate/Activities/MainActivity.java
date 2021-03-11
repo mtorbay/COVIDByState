@@ -42,8 +42,6 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerViewAdapter RecyclerViewAdapter;
     private List<State> stateList;
     private RequestQueue queue;
-    private AlertDialog.Builder alertDialogBuilder;
-    private AlertDialog dialog;
 
 
     @Override
@@ -138,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         MenuItem menuItem=menu.findItem(R.id.new_search);
         SearchView searchView=(SearchView)menuItem.getActionView();
-        searchView.setQueryHint("Écrire le nom à rechercher");
+        searchView.setQueryHint("Entrer le nom d'un état");
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -149,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
                     stateList.clear();
                     getStates(query);
 
-                    //gestion du clavier
+                    //clavier
 
                     InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                     if (getCurrentFocus() != null)
