@@ -102,11 +102,11 @@ public class MainActivity extends AppCompatActivity {
                         state.setTxtState(stateObj.getString("state"));
                         state.setTxtDate("Date: " + stateObj.getInt("date"));
                         state.setTxtCasesPositive("Confirmed Cases: " + stateObj.getInt("positive"));
-                        state.setTxtCasesProbable("Probable Cases: " + stateObj.getInt("probableCases"));
-                        state.setTxtCasesNegative("Negative Tests: " + stateObj.getInt("negative"));
-                        state.setTxtDeaths("Deaths: " + stateObj.getInt("deathConfirmed"));
-                        state.setTxtHospitalizations("Hospitalizations: " + stateObj.getInt("hospitalized"));
-                        state.setTxtHospitalizedCurrently("Currently Hospitalized: " + stateObj.getInt("hospitalizedCurrently"));
+                        state.setTxtCasesProbable("Probable Cases: " + stateObj.getString("probableCases"));
+                        state.setTxtCasesNegative("Negative Tests: " + stateObj.getString("negative"));
+                        state.setTxtDeaths("Deaths: " + stateObj.getString("deathConfirmed"));
+                        state.setTxtHospitalizations("Hospitalizations: " + stateObj.getString("hospitalized"));
+                        state.setTxtHospitalizedCurrently("Currently Hospitalized: " + stateObj.getString("hospitalizedCurrently"));
                         Log.d("States =: ", state.getTxtState());
                         stateList.add(state);
 

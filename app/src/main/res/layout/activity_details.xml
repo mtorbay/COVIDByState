@@ -21,11 +21,12 @@
             android:padding="5dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <ImageView
                 android:id="@+id/Image"
-                android:background="@android:color/background_dark"
                 android:layout_width="90dp"
-                android:layout_height="90dp"/>
+                android:layout_height="90dp"
+                android:background="@color/teal_700" />
 
             <TextView
                 android:id="@+id/txtState"
