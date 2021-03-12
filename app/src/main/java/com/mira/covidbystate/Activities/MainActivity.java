@@ -21,6 +21,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.mira.covidbystate.Data.RecyclerViewAdapter;
@@ -82,29 +83,30 @@ public class MainActivity extends AppCompatActivity {
     public List<State> getStates(String searchTerm) {
         stateList.clear();
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET,
                 Constants.URL,
-                null, new Response.Listener<JSONObject>() {
+                null, new Response.Listener<JSONArray>() {
 
             @Override
-            public void onResponse(JSONObject response) {
+            public void onResponse(JSONArray response) {
 
                 try{
-                    JSONArray statesArray = response.getJSONArray("Search");
+                    //JSONArray statesArray = response.getJSONArray(0);
+                    //Log.d("States = ", String.valueOf(statesArray));
 
-                    for (int i = 0; i < statesArray.length(); i++) {
+                    for (int i = 0; i < response.length(); i++) {
 
-                        JSONObject stateObj = statesArray.getJSONObject(i);
+                        JSONObject stateObj = response.getJSONObject(i);
 
                         State state = new State();
                         state.setTxtState(stateObj.getString("state"));
-                        state.setTxtDate("Date: " + stateObj.getString("date"));
-                        state.setTxtCasesPositive("Confirmed Cases: " + stateObj.getString("positive"));
-                        state.setTxtCasesProbable("Probable Cases: " + stateObj.getString("probableCases"));
-                        state.setTxtCasesNegative("Negative Tests: " + stateObj.getString("negative"));
-                        state.setTxtDeaths("Deaths: " + stateObj.getString("deathConfirmed"));
-                        state.setTxtHospitalizations("Hospitalizations: " + stateObj.getString("hospitalized"));
-                        state.setTxtHospitalizedCurrently("Currently Hospitalized: " + stateObj.getString("hospitalizedCurrently"));
+                        state.setTxtDate("Date: " + stateObj.getInt("date"));
+                        state.setTxtCasesPositive("Confirmed Cases: " + stateObj.getInt("positive"));
+                        state.setTxtCasesProbable("Probable Cases: " + stateObj.getInt("probableCases"));
+                        state.setTxtCasesNegative("Negative Tests: " + stateObj.getInt("negative"));
+                        state.setTxtDeaths("Deaths: " + stateObj.getInt("deathConfirmed"));
+                        state.setTxtHospitalizations("Hospitalizations: " + stateObj.getInt("hospitalized"));
+                        state.setTxtHospitalizedCurrently("Currently Hospitalized: " + stateObj.getInt("hospitalizedCurrently"));
                         Log.d("States =: ", state.getTxtState());
                         stateList.add(state);
 
@@ -125,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        queue.add(jsonObjectRequest);
+        queue.add(jsonArrayRequest);
 
         return stateList;
 
