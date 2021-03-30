@@ -1,6 +1,7 @@
 package com.mira.covidbystate.Activities;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,8 +12,10 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.mira.covidbystate.Data.RecyclerViewAdapter;
 import com.mira.covidbystate.Model.State;
 import com.mira.covidbystate.R;
 import com.mira.covidbystate.Util.Constants;
@@ -67,26 +70,32 @@ public class DetailsActivity extends AppCompatActivity {
     private void getMovieDetails(String id) {
 
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET,
                 Constants.URL,
-                null, new Response.Listener<JSONObject>() {
+                null, new Response.Listener<JSONArray>() {
             @Override
-            public void onResponse(JSONObject response) {
+            public void onResponse(JSONArray response) {
                 try{
 
-                        txtState.setText(response.getString("state"));
-                        txtDate.setText("Date: " + response.getString("date"));
-                        txtCasesPositive.setText("Positive Tests: " + response.getString("positive"));
-                        txtCasesNegative.setText("Negative Tests: " + response.getString("negative"));
-                        txtCasesProbable.setText("Probable Cases: " + response.getString("probableCases"));
-                        txtDeaths.setText("Deaths: " + response.getString("deaths"));
-                        txtHospitalizations.setText("Hospitalizations: " + response.getString("hospitalized"));
-                        txtHospitalizedCurrently.setText("Currently Hospitalized: " + response.getString("hospitalizedCurrently"));
-                        txtOnVentCurrently.setText("Currently On Ventilator: " + response.getString("onVentilatorCurrently"));
+                    for (int i = 0; i < response.length(); i++) {
+
+                        JSONObject stateObj = response.getJSONObject(i);
+
+                        State state = new State();
+                        state.setTxtState(stateObj.getString("state"));
+                        state.setTxtDate("Date: " + stateObj.getInt("date"));
+                        state.setTxtCasesPositive("Confirmed Cases: " + stateObj.getInt("positive"));
+                        state.setTxtCasesProbable("Probable Cases: " + stateObj.getString("probableCases"));
+                        state.setTxtCasesNegative("Negative Tests: " + stateObj.getString("negative"));
+                        state.setTxtDeaths("Deaths: " + stateObj.getString("deathConfirmed"));
+                        state.setTxtHospitalizations("Hospitalizations: " + stateObj.getString("hospitalized"));
+                        state.setTxtHospitalizedCurrently("Currently Hospitalized: " + stateObj.getString("hospitalizedCurrently"));
+                        Log.d("States =: ", state.getTxtState());
+
 
                     }
 
-                catch (JSONException e) {
+                }catch (JSONException e) {
                     e.printStackTrace();
                 }
 
@@ -99,7 +108,7 @@ public class DetailsActivity extends AppCompatActivity {
 
             }
         });
-        queue.add(jsonObjectRequest);
+        queue.add(jsonArrayRequest);
 
     }
 

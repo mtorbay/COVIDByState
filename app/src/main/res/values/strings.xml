@@ -2,4 +2,5 @@
     <string name="app_name">COVID By State</string>
     <string name="txtHeader">COVID Data By State</string>
     <string name="deathsID">"Deaths: "</string>
+    <string name="Search">search</string>
 </resources>

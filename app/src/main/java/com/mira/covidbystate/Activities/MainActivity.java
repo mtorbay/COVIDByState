@@ -1,9 +1,7 @@
 package com.mira.covidbystate.Activities;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
-import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -49,18 +47,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        // Toolbar toolbar = findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
 
         queue = Volley.newRequestQueue(this);
-
-       /* FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        }); */
 
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
@@ -91,8 +79,6 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(JSONArray response) {
 
                 try{
-                    //JSONArray statesArray = response.getJSONArray(0);
-                    //Log.d("States = ", String.valueOf(statesArray));
 
                     for (int i = 0; i < response.length(); i++) {
 
@@ -133,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
     //search
-    /*@Override
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         MenuItem menuItem=menu.findItem(R.id.new_search);
@@ -166,5 +152,5 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         return true;
-    } */
+    }
     }
